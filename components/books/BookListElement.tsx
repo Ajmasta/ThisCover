@@ -1,6 +1,7 @@
 import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 import React from "react";
 import { IBookSummary } from "../../utils/api/constants";
+import { theme } from "../../styles/theme";
 
 interface Props {
   book: IBookSummary;
@@ -34,6 +35,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     marginBottom: 10,
+    elevation: 2,
+    height: 95,
   },
   textContainer: {
     alignSelf: "center",

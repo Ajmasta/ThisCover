@@ -1,14 +1,35 @@
-import { View, Text, StyleSheet } from "react-native";
-import React from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableHighlight,
+  TouchableOpacity,
+} from "react-native";
+import React, { useState } from "react";
 import { theme } from "../../styles/theme";
 
 interface Props {
   genre: string;
+  activeGenre: string;
 }
-const GenresMenuElement = ({ genre }: Props) => {
+const GenresMenuElement = ({ genre, activeGenre }: Props) => {
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>{genre}</Text>
+    <View
+      style={
+        activeGenre === genre
+          ? { ...styles.containerActive, ...styles.container }
+          : styles.container
+      }
+    >
+      <Text
+        style={
+          activeGenre === genre
+            ? { ...styles.textActive, ...styles.text }
+            : styles.text
+        }
+      >
+        {genre}
+      </Text>
     </View>
   );
 };
@@ -16,16 +37,22 @@ const GenresMenuElement = ({ genre }: Props) => {
 export default GenresMenuElement;
 const styles = StyleSheet.create({
   container: {
-    width: 200,
-    height: 50,
+    marginRight: 10,
+    marginLeft: 10,
+    paddingTop: 5,
+    paddingLeft: 5,
+    paddingRight: 5,
     alignItems: "center",
     justifyContent: "center",
-    borderWidth: 2,
-    borderColor: theme.color.primary,
     marginBottom: 15,
-    borderRadius: 15,
+    borderRadius: 4,
   },
   text: {
-    fontSize: 18,
+    fontSize: 14,
   },
+  containerActive: {
+    borderTopWidth: 2,
+    borderColor: theme.color.secondary,
+  },
+  textActive: { color: theme.color.secondary },
 });

@@ -19,9 +19,10 @@ export const useBookSummaries = (genre: string): IHookSummariesValues => {
         setBooks(BooksArray);
         console.log(err);
         setErr("Too Many API Requests. Enjoy our offline collection");
+        setTimeout(() => setErr(""), 3000);
       }
     };
     fetchBooks();
-  }, []);
+  }, [genre]);
   return { books, err };
 };

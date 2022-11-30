@@ -12,6 +12,8 @@ import React from "react";
 import BookSummaryText from "./BookSummaryText";
 import { IBookDetails } from "../../utils/api/constants";
 import { useBookDetails } from "../../hooks/useBookDetails";
+import { AntDesign } from "@expo/vector-icons";
+import ErrorMessage from "../notifications/ErrorMessage";
 
 interface BookSummaryProps {
   setPressed: React.Dispatch<React.SetStateAction<string>>;
@@ -24,6 +26,7 @@ const BookSummary = ({ setPressed, bookID }: BookSummaryProps) => {
       style={styles.container}
       animationType="slide"
       presentationStyle="pageSheet"
+      onRequestClose={() => setPressed("")}
     >
       <TouchableOpacity
         onPress={() => {
@@ -31,7 +34,7 @@ const BookSummary = ({ setPressed, bookID }: BookSummaryProps) => {
         }}
         style={styles.button}
       >
-        <Text>Close</Text>
+        <AntDesign name="arrowleft" size={24} color="black" />
       </TouchableOpacity>
       {!bookDetails ? (
         <ActivityIndicator size={"large"} />
@@ -40,6 +43,7 @@ const BookSummary = ({ setPressed, bookID }: BookSummaryProps) => {
           <BookSummaryText book={bookDetails} />
         </ScrollView>
       )}
+      <ErrorMessage err={err} />
     </Modal>
   );
 };
@@ -54,12 +58,11 @@ const styles = StyleSheet.create({
   },
   button: {
     justifySelf: "center",
-    alignSelf: "center",
+    alignSelf: "flex-start",
     alignItems: "center",
     justifyContent: "center",
     marginTop: 10,
-    padding: 20,
-    borderWidth: 2,
-    borderRadius: 5,
+    marginBottom: 10,
+    marginLeft: 20,
   },
 });

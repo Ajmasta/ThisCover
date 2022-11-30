@@ -1,28 +1,36 @@
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import React, { useEffect } from "react";
+import { StyleSheet, TouchableOpacity, ScrollView } from "react-native";
+import React, { useEffect, useState } from "react";
 import Genres from "../data/genres.json";
-import GenresMenu from "../components/menu/GenresMenu";
-import { PanGestureHandler } from "react-native-gesture-handler";
 import GenresMenuElement from "../components/menu/GenresMenuElement";
 interface Props {
   setGenre: React.Dispatch<React.SetStateAction<string>>;
 }
 const ChooseGenreScreen = ({ setGenre }: Props) => {
+  const [activeGenre, setActiveGenre] = useState<string>("");
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Choose a genre</Text>
+    <ScrollView
+      contentContainerStyle={styles.container}
+      horizontal={true}
+      showsHorizontalScrollIndicator={false}
+    >
       {Genres.map((genre, i) => (
-        <TouchableOpacity key={`${i}genre`} onPress={() => setGenre(genre)}>
-          <GenresMenuElement genre={genre} />
+        <TouchableOpacity
+          key={`${i}genre`}
+          onPress={() => {
+            setGenre(genre);
+            setActiveGenre(genre);
+          }}
+        >
+          <GenresMenuElement genre={genre} activeGenre={activeGenre} />
         </TouchableOpacity>
       ))}
-    </View>
+    </ScrollView>
   );
 };
 
 export default ChooseGenreScreen;
 const styles = StyleSheet.create({
-  container: { flex: 1, justifyContent: "center", alignItems: "center" },
+  container: { justifyContent: "center", alignItems: "center" },
   title: {
     fontSize: 24,
     marginBottom: 15,

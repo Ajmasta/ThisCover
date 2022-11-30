@@ -4,7 +4,8 @@ export const theme = {
     textBlack: "#140900",
     white: "#ffffff",
     primary: "#ABD1F4",
-    secondary: "#DEC365",
+    secondary: "#5ba5eb",
+    lightBlue: "#b9e3ed",
   },
 };
 

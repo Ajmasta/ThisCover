@@ -9,7 +9,7 @@ export interface IBookSummary {
 export interface IBookDetails {
   book_id: number;
   name: string;
-  authors: [string];
+  authors: string[];
   rating: number;
   cover: string;
   pages: number;

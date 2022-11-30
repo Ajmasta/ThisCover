@@ -18,6 +18,8 @@ import { resetData } from "../utils/storage/storage";
 import { getPopularBooks } from "../utils/api/getters";
 import { theme } from "../styles/theme";
 import { useBookSummaries } from "../hooks/useBookSummaries";
+import ChooseGenreScreen from "./ChooseGenreScreen";
+import ErrorMessage from "../components/notifications/ErrorMessage";
 interface CoverPickerProps {
   genre: string;
   setGenre: React.Dispatch<React.SetStateAction<string>>;
@@ -27,7 +29,7 @@ const CoverPickerScreen = ({ genre, setGenre }: CoverPickerProps) => {
   const [pressed, setPressed] = useState<string>("");
 
   return (
-    <GestureHandlerRootView style={styles.container}>
+    <>
       {!books ? (
         <ActivityIndicator size={"large"} />
       ) : (
@@ -40,25 +42,13 @@ const CoverPickerScreen = ({ genre, setGenre }: CoverPickerProps) => {
           />
         ))
       )}
-      <TouchableOpacity
-        style={styles.changeButton}
-        onPress={() => setGenre("")}
-      >
-        <Text>Change Genre</Text>
-      </TouchableOpacity>
-      {err ? (
-        <View style={styles.errorContainer}>
-          <Text style={{ color: "red" }}>{err}</Text>
-        </View>
-      ) : (
-        <></>
-      )}
+      <ErrorMessage err={err} />
       {pressed !== "" ? (
         <BookSummaryModal setPressed={setPressed} bookID={pressed} />
       ) : (
         <></>
       )}
-    </GestureHandlerRootView>
+    </>
   );
 };
 
@@ -71,21 +61,4 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   image: { width: 300, height: 400 },
-  changeButton: {
-    position: "absolute",
-    bottom: 40,
-    borderWidth: 2,
-    borderColor: theme.color.primary,
-    padding: 5,
-    borderRadius: 10,
-  },
-  errorContainer: {
-    position: "absolute",
-    bottom: 40,
-    backgroundColor: "#ffffff",
-    padding: 5,
-    borderWidth: 2,
-    borderColor: theme.color.secondary,
-    borderRadius: 10,
-  },
 });
