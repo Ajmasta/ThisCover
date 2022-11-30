@@ -39,7 +39,6 @@ const GenresMenu = ({ genres }: IGenres) => {
     },
     onEnd: () => {
       const distance = translateX.value;
-      console.log(distance);
       if (distance < 20) {
         translateX.value = withSpring(100);
         translateY.value = withSpring(0);

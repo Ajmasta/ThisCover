@@ -1,82 +1,91 @@
-import { View, Text, StyleSheet } from "react-native";
-import React from "react";
 import {
-  GestureHandlerRootView,
-  PanGestureHandler,
-  PanGestureHandlerGestureEvent,
-} from "react-native-gesture-handler";
-import Animated, {
-  useAnimatedGestureHandler,
-  useAnimatedStyle,
-  useSharedValue,
-  withSpring,
-} from "react-native-reanimated";
-
-interface IGenres {
-  genres: string[];
+  Image,
+  ImageBackground,
+  StyleSheet,
+  View,
+  Text,
+  TouchableOpacity,
+  Alert,
+  ActivityIndicator,
+} from "react-native";
+import React, { useState, useEffect } from "react";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { IBookSummary } from "../utils/api/constants";
+import BookSummaryModal from "../components/books/BookSummaryModal";
+import CoverPickerAnimation from "../components/books/CoverPickerAnimation";
+import BooksArray from "../data/booksMockData.json";
+import { resetData } from "../utils/storage/storage";
+import { getPopularBooks } from "../utils/api/getters";
+import { theme } from "../styles/theme";
+import { useBookSummaries } from "../hooks/useBookSummaries";
+interface CoverPickerProps {
+  genre: string;
+  setGenre: React.Dispatch<React.SetStateAction<string>>;
 }
-type ContextType = {
-  translateX: number;
-  translateY: number;
-};
+const CoverPickerScreen = ({ genre, setGenre }: CoverPickerProps) => {
+  const { books, err } = useBookSummaries(genre);
+  const [pressed, setPressed] = useState<string>("");
 
-const CoverPicker = ({ genres }: IGenres) => {
-  const translateX = useSharedValue(0);
-  const translateY = useSharedValue(0);
-
-  const panGestureEvent = useAnimatedGestureHandler<
-    PanGestureHandlerGestureEvent,
-    ContextType
-  >({
-    onStart: (event, context) => {
-      context.translateX = translateX.value;
-      context.translateY = translateY.value;
-    },
-    onActive: (event, context) => {
-      translateX.value = event.translationX + context.translateX;
-      translateY.value = event.translationY + context.translateY;
-    },
-    onEnd: () => {
-      const distance = translateX.value;
-      console.log(distance);
-      if (distance < 20) {
-        translateX.value = withSpring(100);
-        translateY.value = withSpring(0);
-      }
-    },
-  });
-
-  const rStyle = useAnimatedStyle(() => {
-    return {
-      transform: [
-        {
-          translateX: translateX.value,
-        },
-        {
-          translateY: translateY.value,
-        },
-      ],
-    };
-  });
   return (
-    <PanGestureHandler onGestureEvent={panGestureEvent}>
-      <Animated.View style={[styles.square, rStyle]}></Animated.View>
-    </PanGestureHandler>
+    <GestureHandlerRootView style={styles.container}>
+      {!books ? (
+        <ActivityIndicator size={"large"} />
+      ) : (
+        books.map((book, i) => (
+          <CoverPickerAnimation
+            key={`cover${i}`}
+            i={i}
+            book={book}
+            setPressed={setPressed}
+          />
+        ))
+      )}
+      <TouchableOpacity
+        style={styles.changeButton}
+        onPress={() => setGenre("")}
+      >
+        <Text>Change Genre</Text>
+      </TouchableOpacity>
+      {err ? (
+        <View style={styles.errorContainer}>
+          <Text style={{ color: "red" }}>{err}</Text>
+        </View>
+      ) : (
+        <></>
+      )}
+      {pressed !== "" ? (
+        <BookSummaryModal setPressed={setPressed} bookID={pressed} />
+      ) : (
+        <></>
+      )}
+    </GestureHandlerRootView>
   );
 };
 
-export default CoverPicker;
+export default CoverPickerScreen;
 
 const styles = StyleSheet.create({
-  square: {
-    width: 100,
-    height: 100,
-    backgroundColor: "rgba(0, 0, 256, 0.5)",
-    borderRadius: 20,
-  },
   container: {
-    alignItems: "center",
     justifyContent: "center",
+    alignItems: "center",
     flex: 1,
+  },
+  image: { width: 300, height: 400 },
+  changeButton: {
+    position: "absolute",
+    bottom: 40,
+    borderWidth: 2,
+    borderColor: theme.color.primary,
+    padding: 5,
+    borderRadius: 10,
+  },
+  errorContainer: {
+    position: "absolute",
+    bottom: 40,
+    backgroundColor: "#ffffff",
+    padding: 5,
+    borderWidth: 2,
+    borderColor: theme.color.secondary,
+    borderRadius: 10,
   },
 });
