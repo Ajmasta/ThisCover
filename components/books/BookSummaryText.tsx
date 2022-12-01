@@ -19,11 +19,9 @@ const BookSummaryText = ({ bookDetails }: BookSummaryTextProps) => {
             <Text style={styles.title}>{bookDetails?.name}</Text>
             <View style={styles.authorsContainer}>
               {bookDetails?.authors.map((author, i) => (
-                <>
-                  <Text style={styles.author} key={`${i}author`}>
-                    {author}
-                  </Text>
-                </>
+                <Text style={styles.author} key={`${i}author`}>
+                  {author}
+                </Text>
               ))}
             </View>
             <Text style={styles.summary}>{bookDetails?.synopsis}</Text>
@@ -60,5 +58,8 @@ const styles = StyleSheet.create({
     width: 250,
     height: 350,
   },
-  container: { flex: 1, alignItems: "center" },
+  container: {
+    flex: 1,
+    alignItems: "center",
+  },
 });

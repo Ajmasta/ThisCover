@@ -11,7 +11,7 @@ It was built using react-native, expo and react-native-reanimated 2.
 
 I built this app with a temporary API that has a very low rate (20/hour). If you want to try out the app you can get an API key [here](https://rapidapi.com/roftcomp-laGmBwlWLm/api/hapi-books/)
 
-Otherwise, I have also added some mock data so that you can see the layout of every screen.
+Otherwise, I have also added some mock data so that you can see the layout of every screen even when the API fails.
 
 ## Future updates
 
