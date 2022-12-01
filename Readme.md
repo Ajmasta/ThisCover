@@ -22,7 +22,8 @@ REACT_APP_API_KEY = YOUR_API_KEY
 
 ## Api Issues
 
-I built this app with a temporary API that has a very low rate (20/hour). If you want to try out the app you can get an API key [here](https://rapidapi.com/roftcomp-laGmBwlWLm/api/hapi-books/)
+I built this app with a temporary API that has a very low rate (20 requests/hour) because it was the best free one I could find for my purposes.
+If you want to try out the app as it was meant to be you can get an API key [here](https://rapidapi.com/roftcomp-laGmBwlWLm/api/hapi-books/)
 
 Otherwise, I have also added some mock data so that you can see the layout of every screen even when the API fails.
 
