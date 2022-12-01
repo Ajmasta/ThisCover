@@ -26,5 +26,5 @@ Otherwise, I have also added some mock data so that you can see the layout of ev
 
 ## Future updates
 
-In the future, I plan to integrate Google login and Google Books API
-Other features, like marking books as read and overall between saved books management will also be made.
+In the future, I plan to integrate Google login and Google Books API.
+I also plan to improve the saved list management.
