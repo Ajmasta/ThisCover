@@ -7,6 +7,16 @@ You can also click on the books to get more details.
 
 It was built using react-native, expo and react-native-reanimated 2.
 
+## Running the app
+
+If you want to build the app and run it, you might need an API key (Mock data is available if you don't use the API key).
+
+Then, simply create a .env file with
+
+```
+REACT_APP_API_KEY = YOUR_API_KEY
+```
+
 ## Api Issues
 
 I built this app with a temporary API that has a very low rate (20/hour). If you want to try out the app you can get an API key [here](https://rapidapi.com/roftcomp-laGmBwlWLm/api/hapi-books/)
