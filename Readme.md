@@ -9,9 +9,10 @@ It was built using react-native, expo and react-native-reanimated 2.
 
 ## Running the app
 
-If you want to build the app and run it, you might need an API key (Mock data is available if you don't use the API key).
+If you want to build the app and run it, you might need an API key. Check the section below to know how to get one.
+Mock data is available if you don't use the API key.
 
-Then, simply create a .env file with
+After getting the API key you will also need to create a .env file with
 
 ```
 REACT_APP_API_KEY = YOUR_API_KEY
