@@ -1,5 +1,4 @@
-import { View, Text } from "react-native";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { IBookDetails } from "../utils/api/constants";
 import { getBookDetails } from "../utils/api/getters";
 import MockBookDetails from "../data/bookDetailsMockData.json";
@@ -15,12 +14,11 @@ export const useBookDetails = (id: string): IHookDetailsValues => {
     const fetchBookDetails = async () => {
       try {
         const fetchedDetails = await getBookDetails(id);
-        console.log(fetchedDetails);
         if (!fetchedDetails?.authors) throw new Error("Too many api requests");
         setBookDetails(fetchedDetails);
       } catch (err) {
         console.log(err);
-        setErr("Too many API request. Enjoy this placeholder info");
+        setErr("Error: Too many API request. This is placeholder info.");
         setBookDetails(MockBookDetails);
         setTimeout(() => setErr(""), 3000);
       }

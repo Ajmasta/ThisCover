@@ -10,7 +10,7 @@ const ErrorMessage = ({ err }: IErrorMessageProps) => {
     <>
       {err ? (
         <View style={styles.errorContainer}>
-          <Text style={{ color: "red" }}>{err}</Text>
+          <Text style={{ color: "white" }}>{err}</Text>
         </View>
       ) : (
         <></>
@@ -25,11 +25,11 @@ const styles = StyleSheet.create({
   errorContainer: {
     position: "absolute",
     bottom: 60,
-    backgroundColor: "#ffffff",
-    padding: 5,
+    backgroundColor: theme.color.black,
+    padding: theme.spacing.m,
     borderWidth: 2,
-    borderColor: theme.color.secondary,
-    borderRadius: 10,
+    borderColor: theme.color.red,
+    borderRadius: theme.spacing.m,
     alignSelf: "center",
   },
 });

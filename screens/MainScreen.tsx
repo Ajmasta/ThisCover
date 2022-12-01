@@ -1,17 +1,18 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, StyleSheet } from "react-native";
 import React, { useState } from "react";
-import ChooseGenreScreen from "./ChooseGenreScreen";
+import ChooseGenreContainer from "../components/menu/ChooseGenreContainer";
 import CoverPickerScreen from "./CoverPickerScreen";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { theme } from "../styles/theme";
 
 const MainScreen = () => {
-  const [genre, setGenre] = useState("");
+  const [genre, setGenre] = useState<string>("Fantasy");
 
   return (
     <GestureHandlerRootView style={styles.container}>
-      <CoverPickerScreen genre={genre} setGenre={setGenre} />
+      <CoverPickerScreen genre={genre} />
       <View style={styles.genresContainer}>
-        <ChooseGenreScreen setGenre={setGenre} />
+        <ChooseGenreContainer setGenre={setGenre} />
       </View>
     </GestureHandlerRootView>
   );
@@ -24,7 +25,6 @@ const styles = StyleSheet.create({
   genresContainer: {
     position: "absolute",
     bottom: 0,
-
-    paddingBottom: 10,
+    paddingBottom: theme.spacing.m,
   },
 });

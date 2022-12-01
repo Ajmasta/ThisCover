@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 import React, { useState, useRef } from "react";
 import {
   PanGestureHandler,
@@ -14,7 +14,7 @@ import Animated, {
 } from "react-native-reanimated";
 import BookCover from "../../components/books/BookCover";
 import SwipeText from "../../components/books/SwipeText";
-import { getData, resetData, storeData } from "../../utils/storage/storage";
+import { storeData } from "../../utils/storage/storage";
 import { IBookSummary } from "../../utils/api/constants";
 interface IGenres {
   genres: string[];
@@ -23,13 +23,17 @@ type ContextType = {
   translateX: number;
   translateY: number;
 };
-interface Props {
+interface CoverPickerAnimationProps {
   i: number;
   setPressed: React.Dispatch<React.SetStateAction<string>>;
   book: IBookSummary;
 }
 
-const CoverPickerAnimation = ({ i, setPressed, book }: Props) => {
+const CoverPickerAnimation = ({
+  i,
+  setPressed,
+  book,
+}: CoverPickerAnimationProps) => {
   const translateX = useSharedValue(0);
   const translateY = useSharedValue(0);
   const theta = useRef(`${Math.random() * 10}deg`);
@@ -54,6 +58,7 @@ const CoverPickerAnimation = ({ i, setPressed, book }: Props) => {
         translateX.value = withDelay(300, withSpring(5 * translateX.value));
         translateY.value = withSpring(0);
         if (distance > 0) {
+          //runOnJS necessary to run JS thread while in UI thread
           runOnJS(setChoice)("Saved");
           runOnJS(storeData)("savedBooks", book);
         } else {
@@ -78,6 +83,7 @@ const CoverPickerAnimation = ({ i, setPressed, book }: Props) => {
       ],
     };
   });
+
   return (
     <PanGestureHandler onGestureEvent={panGestureEvent}>
       <Animated.View style={[styles.square, rStyle]}>

@@ -1,36 +1,60 @@
-import { View, Text, Image, StyleSheet } from "react-native";
+import { View, Text, Image, StyleSheet, ActivityIndicator } from "react-native";
 import React from "react";
-import book from "../../data/bookDetailsMockData.json";
 import { IBookDetails } from "../../utils/api/constants";
+import { ScrollView } from "react-native-gesture-handler";
+import { theme } from "../../styles/theme";
 
 interface BookSummaryTextProps {
-  book: IBookDetails | undefined;
+  bookDetails: IBookDetails | undefined;
 }
-const BookSummaryText = ({ book }: BookSummaryTextProps) => {
+const BookSummaryText = ({ bookDetails }: BookSummaryTextProps) => {
   return (
-    <View style={styles.container}>
-      <Image source={{ uri: book?.cover }} style={styles.image} />
-      <Text style={styles.title}>{book?.name}</Text>
-      <Text style={styles.author}>{book?.authors.map((author) => author)}</Text>
-      <Text style={styles.summary}>{book?.synopsis}</Text>
-    </View>
+    <>
+      {!bookDetails ? (
+        <ActivityIndicator size={"large"} />
+      ) : (
+        <ScrollView>
+          <View style={styles.container}>
+            <Image source={{ uri: bookDetails?.cover }} style={styles.image} />
+            <Text style={styles.title}>{bookDetails?.name}</Text>
+            <View style={styles.authorsContainer}>
+              {bookDetails?.authors.map((author, i) => (
+                <>
+                  <Text style={styles.author} key={`${i}author`}>
+                    {author}
+                  </Text>
+                </>
+              ))}
+            </View>
+            <Text style={styles.summary}>{bookDetails?.synopsis}</Text>
+          </View>
+        </ScrollView>
+      )}
+    </>
   );
 };
 
 export default BookSummaryText;
 const styles = StyleSheet.create({
   title: {
-    fontSize: 24,
+    fontSize: theme.fontSize.xl,
+    fontWeight: "700",
+    textAlign: "center",
+    width: "90%",
   },
   author: {
-    fontSize: 16,
+    fontSize: theme.fontSize.l,
+    marginRight: theme.spacing.m,
+  },
+  authorsContainer: {
+    flexDirection: "row",
   },
   summary: {
-    fontSize: 16,
+    fontSize: theme.fontSize.m,
     width: "90%",
     textAlign: "justify",
     lineHeight: 24,
-    marginTop: 25,
+    marginTop: theme.spacing.l,
   },
   image: {
     width: 250,

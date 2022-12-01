@@ -1,5 +1,6 @@
-import { View, Text, StyleSheet } from "react-native";
+import { Text, StyleSheet } from "react-native";
 import React from "react";
+import { theme } from "../../styles/theme";
 
 interface SwipeText {
   text: string;
@@ -30,21 +31,21 @@ const styles = StyleSheet.create({
   saved: {
     borderColor: "#6ee3b4",
     backgroundColor: "#6ee3b4",
-    left: 10,
+    left: theme.spacing.m,
   },
   discarded: {
     borderColor: "red",
     backgroundColor: "red",
-    right: 10,
+    right: theme.spacing.m,
   },
   commonStyle: {
     color: "white",
-    borderWidth: 4,
-    borderRadius: 5,
-    padding: 8,
     position: "absolute",
-    top: 10,
-    fontSize: 20,
+    borderWidth: 3,
+    borderRadius: 5,
+    padding: theme.spacing.s,
+    top: theme.spacing.m,
+    fontSize: theme.fontSize.l,
     justifyContent: "center",
     alignItems: "center",
   },

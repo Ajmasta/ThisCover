@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
     alignItems: "center",
-    marginBottom: 10,
+    marginBottom: theme.spacing.m,
     elevation: 2,
     height: 95,
   },
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     justifySelf: "center",
   },
   author: {
-    fontSize: 12,
+    fontSize: theme.fontSize.s,
   },
   title: {
     fontWeight: "700",

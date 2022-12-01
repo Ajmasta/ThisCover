@@ -1,36 +1,20 @@
-import {
-  Image,
-  ImageBackground,
-  StyleSheet,
-  View,
-  Text,
-  TouchableOpacity,
-  Alert,
-  ActivityIndicator,
-} from "react-native";
-import React, { useState, useEffect } from "react";
-import { GestureHandlerRootView } from "react-native-gesture-handler";
-import { IBookSummary } from "../utils/api/constants";
-import BookSummaryModal from "../components/books/BookSummaryModal";
+import { StyleSheet, ActivityIndicator } from "react-native";
+import React, { useState } from "react";
+import BookSummaryScreen from "./BookSummaryScreen";
 import CoverPickerAnimation from "../components/books/CoverPickerAnimation";
-import BooksArray from "../data/booksMockData.json";
-import { resetData } from "../utils/storage/storage";
-import { getPopularBooks } from "../utils/api/getters";
-import { theme } from "../styles/theme";
+
 import { useBookSummaries } from "../hooks/useBookSummaries";
-import ChooseGenreScreen from "./ChooseGenreScreen";
 import ErrorMessage from "../components/notifications/ErrorMessage";
 interface CoverPickerProps {
   genre: string;
-  setGenre: React.Dispatch<React.SetStateAction<string>>;
 }
-const CoverPickerScreen = ({ genre, setGenre }: CoverPickerProps) => {
-  const { books, err } = useBookSummaries(genre);
+const CoverPickerScreen = ({ genre }: CoverPickerProps) => {
+  const { books, loading, err } = useBookSummaries(genre);
   const [pressed, setPressed] = useState<string>("");
 
   return (
     <>
-      {!books ? (
+      {!books || loading ? (
         <ActivityIndicator size={"large"} />
       ) : (
         books.map((book, i) => (
@@ -43,10 +27,8 @@ const CoverPickerScreen = ({ genre, setGenre }: CoverPickerProps) => {
         ))
       )}
       <ErrorMessage err={err} />
-      {pressed !== "" ? (
-        <BookSummaryModal setPressed={setPressed} bookID={pressed} />
-      ) : (
-        <></>
+      {pressed && (
+        <BookSummaryScreen setPressed={setPressed} bookID={pressed} />
       )}
     </>
   );

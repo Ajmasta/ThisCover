@@ -6,23 +6,28 @@ import BooksArray from "../data/booksMockData.json";
 interface IHookSummariesValues {
   books: IBookSummary[] | undefined;
   err: string;
+  loading: boolean;
 }
 export const useBookSummaries = (genre: string): IHookSummariesValues => {
   const [books, setBooks] = useState<IBookSummary[]>();
   const [err, setErr] = useState<string>("");
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
     const fetchBooks = async () => {
+      setLoading(true);
       try {
         const fetchedBooks = await getPopularBooks(genre);
-        setBooks(fetchedBooks?.slice(0, 30));
+        setBooks(fetchedBooks?.slice(0, 25));
+        setLoading(false);
       } catch (err) {
-        setBooks(BooksArray);
         console.log(err);
-        setErr("Too Many API Requests. Enjoy our offline collection");
+        setBooks(BooksArray);
+        setErr("Error: Too Many API Requests. This is our offline collection");
+        setLoading(false);
         setTimeout(() => setErr(""), 3000);
       }
     };
     fetchBooks();
   }, [genre]);
-  return { books, err };
+  return { books, loading, err };
 };

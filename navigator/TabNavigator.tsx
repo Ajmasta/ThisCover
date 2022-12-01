@@ -1,7 +1,6 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
-import CoverPickerScreen from "../screens/CoverPickerScreen";
 import SavedBooksScreen from "../screens/SavedBooksScreen";
 import { Entypo } from "@expo/vector-icons";
 import MainScreen from "../screens/MainScreen";

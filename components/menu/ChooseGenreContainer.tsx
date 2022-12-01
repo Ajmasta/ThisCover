@@ -1,12 +1,12 @@
 import { StyleSheet, TouchableOpacity, ScrollView } from "react-native";
-import React, { useEffect, useState } from "react";
-import Genres from "../data/genres.json";
-import GenresMenuElement from "../components/menu/GenresMenuElement";
+import React, { useState } from "react";
+import Genres from "../../data/genres.json";
+import GenresMenuElement from "./GenresMenuElement";
 interface Props {
   setGenre: React.Dispatch<React.SetStateAction<string>>;
 }
-const ChooseGenreScreen = ({ setGenre }: Props) => {
-  const [activeGenre, setActiveGenre] = useState<string>("");
+const ChooseGenreContainer = ({ setGenre }: Props) => {
+  const [activeGenre, setActiveGenre] = useState<string>("Fantasy");
   return (
     <ScrollView
       contentContainerStyle={styles.container}
@@ -28,11 +28,7 @@ const ChooseGenreScreen = ({ setGenre }: Props) => {
   );
 };
 
-export default ChooseGenreScreen;
+export default ChooseGenreContainer;
 const styles = StyleSheet.create({
   container: { justifyContent: "center", alignItems: "center" },
-  title: {
-    fontSize: 24,
-    marginBottom: 15,
-  },
 });

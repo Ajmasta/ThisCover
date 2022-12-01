@@ -1,11 +1,5 @@
-import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableHighlight,
-  TouchableOpacity,
-} from "react-native";
-import React, { useState } from "react";
+import { View, Text, StyleSheet } from "react-native";
+import React from "react";
 import { theme } from "../../styles/theme";
 
 interface Props {
@@ -37,18 +31,18 @@ const GenresMenuElement = ({ genre, activeGenre }: Props) => {
 export default GenresMenuElement;
 const styles = StyleSheet.create({
   container: {
-    marginRight: 10,
-    marginLeft: 10,
-    paddingTop: 5,
-    paddingLeft: 5,
-    paddingRight: 5,
+    marginRight: theme.spacing.m,
+    marginLeft: theme.spacing.m,
+    paddingTop: theme.spacing.s,
+    paddingLeft: theme.spacing.s,
+    paddingRight: theme.spacing.s,
     alignItems: "center",
     justifyContent: "center",
-    marginBottom: 15,
+    marginBottom: theme.spacing.m,
     borderRadius: 4,
   },
   text: {
-    fontSize: 14,
+    fontSize: theme.fontSize.m,
   },
   containerActive: {
     borderTopWidth: 2,
