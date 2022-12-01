@@ -1,5 +1,7 @@
 # ThisCover
-
+ ![demo](https://media0.giphy.com/media/S4DOFvp7OoczhhJhgB/giphy.gif)
+ 
+ 
 ThisCover is an app that tries to emulate the feeling of browsing through books at the library or at a bookstore.
 Choose a genre and then simply swipe on books covers left or right, to either discard or save them.
 They are stored in your phone storage so you can go back to them later.
@@ -7,8 +9,6 @@ You can also click on the books to get more details.
 
 It was built using react-native, expo and react-native-reanimated 2.
 
-
- ![demo](https://media0.giphy.com/media/S4DOFvp7OoczhhJhgB/giphy.gif)
 ## Running the app
 
 If you want to build the app and run it, you might need an API key. Check the section below to know how to get one.
